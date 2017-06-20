@@ -2,9 +2,17 @@ package spring.boot.domain;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@AllArgsConstructor 
+@Setter
+@Getter
+@EqualsAndHashCode(of = "questionId")
+@ToString
 public class QuestionEntity {
 	private String questionId;
 	private String desciption;
