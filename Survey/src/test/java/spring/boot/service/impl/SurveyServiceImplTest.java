@@ -10,18 +10,24 @@ import org.junit.Test;
 import spring.boot.domain.SurveyEntity;
 import spring.boot.service.SurveyService;
 
-
-
 public class SurveyServiceImplTest {
 
-	//@Autowired
+	// @Autowired
 	SurveyService surveyService = new SurveyServiceImpl();
 
 	@Test
 	public void testRetrieveAllSurveys() {
 
 		List<SurveyEntity> surveys = surveyService.retrieveAllSurveys();
-		
+
 		assertEquals("Collected Survey", surveys.get(0).getTitle());
+	}
+
+	@Test
+	public void testRetrieveSurveyById() {
+
+		SurveyEntity surveys = surveyService.retrieveSurvey("Survey1");
+
+		assertEquals("Survey1", surveys.getSurveyId());
 	}
 }

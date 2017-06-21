@@ -3,6 +3,7 @@ package spring.boot.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +20,10 @@ public class SurveyEndpoint {
 	@RequestMapping(value="/surveys", method=RequestMethod.GET, produces="application/json")
 	public List<SurveyEntity> getAllSurveys(){
 		return surveyService.retrieveAllSurveys();
+	}
+	
+	@RequestMapping(value="surveys/{surveyId}", method=RequestMethod.GET, produces="application/json")
+	public SurveyEntity getSurveyById(@PathVariable String surveyId){
+		return surveyService.retrieveSurvey(surveyId);
 	}
 }

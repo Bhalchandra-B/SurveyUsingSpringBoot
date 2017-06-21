@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import spring.boot.domain.QuestionEntity;
@@ -15,6 +17,7 @@ public class SurveyServiceImpl implements SurveyService {
 
 	private static List<SurveyEntity> surveys = new ArrayList<SurveyEntity>();
 	private static List<QuestionEntity> questions;
+	private static final Logger LOGGER = LoggerFactory.getLogger(SurveyServiceImpl.class);
 
 	static {
 		QuestionEntity question1 = new QuestionEntity("Question1", "Largest Country in the World", "Russia",
@@ -29,6 +32,7 @@ public class SurveyServiceImpl implements SurveyService {
 		questions = new ArrayList<QuestionEntity>(Arrays.asList(question1, question2, question3, question4));
 		
 		SurveyEntity survey = new SurveyEntity("Survey1", "Collected Survey", "description of the survey1", questions);
+		
 		surveys.add(survey);
 	}
 
@@ -39,7 +43,17 @@ public class SurveyServiceImpl implements SurveyService {
 
 	@Override
 	public SurveyEntity retrieveSurvey(String surveyId) {
-		System.out.println("Retriev a single survey");
+		
+		if(surveyId == null) {
+			LOGGER.error("Provided SurveyId is null");
+			return null;
+		}
+		
+		for(SurveyEntity survey : surveys)
+			if(surveyId.equals(survey.getSurveyId()))
+					return survey;
+		
+		LOGGER.debug("Survey Not found");
 		return null;
 	}
 
