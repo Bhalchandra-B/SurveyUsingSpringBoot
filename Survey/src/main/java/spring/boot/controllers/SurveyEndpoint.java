@@ -22,7 +22,7 @@ public class SurveyEndpoint {
 	@Autowired
 	private SurveyServiceImpl surveyService;
 	
-	@RequestMapping(value="/surveys", method=RequestMethod.GET)
+	@RequestMapping(value="/surveys", method=RequestMethod.GET, produces="application/json")
 	public List<SurveyEntity> getAllSurveys(){
 		return surveyService.retrieveAllSurveys();
 	}
