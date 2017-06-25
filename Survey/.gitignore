@@ -18,3 +18,4 @@ target/
 *.log
 build/
 /.apt_generated/
+/.factorypath
